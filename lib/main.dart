@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'add_transaction_area.dart';
 import 'transaction.dart';
 
 void main() => runApp(const MyApp());
@@ -49,20 +50,7 @@ class MyHomePage extends StatelessWidget {
               child: Text('Card 1'),
             ),
           ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(children: [
-                TextField(decoration: InputDecoration(label: Text('Title'))),
-                TextField(decoration: InputDecoration(label: Text('Title'))),
-                TextButton(
-                  child: Text('Add transaction'),
-                  style: TextButton.styleFrom(surfaceTintColor: Colors.purple),
-                  onPressed: () {},
-                )
-              ]),
-            ),
-          ),
+          AddTransactionArea(),
           Column(
             children: transactions.map((t) {
               return Card(
