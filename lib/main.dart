@@ -51,7 +51,7 @@ class MyHomePage extends StatelessWidget {
               child: Text('Card 1'),
             ),
           ),
-          const AddTransactionArea(),
+          AddTransactionArea(),
           Column(
             children: transactions.map((transaction) {
               return TransactionItem(transactionModel: transaction);

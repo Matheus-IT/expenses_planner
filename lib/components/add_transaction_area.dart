@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AddTransactionArea extends StatelessWidget {
-  const AddTransactionArea({
-    Key? key,
-  }) : super(key: key);
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
+  AddTransactionArea({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,11 +12,20 @@ class AddTransactionArea extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(children: [
-          TextField(decoration: InputDecoration(label: Text('Title'))),
-          TextField(decoration: InputDecoration(label: Text('Amount'))),
+          TextField(
+            decoration: const InputDecoration(label: Text('Title')),
+            controller: titleController,
+          ),
+          TextField(
+            decoration: const InputDecoration(label: Text('Amount')),
+            controller: amountController,
+          ),
           TextButton(
             style: TextButton.styleFrom(surfaceTintColor: Colors.purple),
-            onPressed: () {},
+            onPressed: () {
+              print(titleController.text);
+              print(amountController.text);
+            },
             child: const Text('Add transaction'),
           )
         ]),
