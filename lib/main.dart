@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:expenses_planner/components/transaction_item.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import 'components/add_transaction_area.dart';
 import 'models/transaction_model.dart';
@@ -18,7 +21,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final List<TransactionModel> transactions = [
     TransactionModel(
       id: 't1',
@@ -34,7 +44,15 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
-  MyHomePage({Key? key}) : super(key: key);
+  void handleAddTransaction(String title, String amount) {
+    final newTransaction = TransactionModel(
+      title: title,
+      amount: double.parse(amount),
+      date: DateTime.now(),
+      id: const Uuid().v4(),
+    );
+    setState(() => transactions.add(newTransaction));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +69,7 @@ class MyHomePage extends StatelessWidget {
               child: Text('Card 1'),
             ),
           ),
-          AddTransactionArea(),
+          AddTransactionArea(onSubmit: handleAddTransaction),
           Column(
             children: transactions.map((transaction) {
               return TransactionItem(transactionModel: transaction);

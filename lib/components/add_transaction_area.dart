@@ -4,7 +4,9 @@ class AddTransactionArea extends StatelessWidget {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
 
-  AddTransactionArea({Key? key}) : super(key: key);
+  void Function(String, String) onSubmit;
+
+  AddTransactionArea({required this.onSubmit, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +24,8 @@ class AddTransactionArea extends StatelessWidget {
           ),
           TextButton(
             style: TextButton.styleFrom(surfaceTintColor: Colors.purple),
-            onPressed: () {
-              print(titleController.text);
-              print(amountController.text);
-            },
+            onPressed: () =>
+                onSubmit(titleController.text, amountController.text),
             child: const Text('Add transaction'),
           )
         ]),
