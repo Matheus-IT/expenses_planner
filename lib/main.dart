@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:expenses_planner/components/transaction_item.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
@@ -42,6 +40,30 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 16.53,
       date: DateTime.now(),
     ),
+    TransactionModel(
+      id: 't3',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
+    TransactionModel(
+      id: 't4',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
+    TransactionModel(
+      id: 't5',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
+    TransactionModel(
+      id: 't6',
+      title: 'Weekly Groceries',
+      amount: 16.53,
+      date: DateTime.now(),
+    ),
   ];
 
   void handleAddTransaction(String title, String amount) {
@@ -70,10 +92,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           AddTransactionArea(onSubmit: handleAddTransaction),
-          Column(
-            children: transactions.map((transaction) {
-              return TransactionItem(transactionModel: transaction);
-            }).toList(),
+          Container(
+            height: 300,
+            child: ListView.builder(
+              itemBuilder: (ctx, index) =>
+                  TransactionItem(transactionModel: transactions[index]),
+              itemCount: transactions.length,
+            ),
           ),
         ],
       ),
