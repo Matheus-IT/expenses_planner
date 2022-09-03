@@ -82,25 +82,27 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Flutter App'),
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            width: double.infinity,
-            child: Card(
-              elevation: 5,
-              child: Text('Card 1'),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              width: double.infinity,
+              child: Card(
+                elevation: 5,
+                child: Text('Card 1'),
+              ),
             ),
-          ),
-          AddTransactionArea(onSubmit: handleAddTransaction),
-          Container(
-            height: 300,
-            child: ListView.builder(
-              itemBuilder: (ctx, index) =>
-                  TransactionItem(transactionModel: transactions[index]),
-              itemCount: transactions.length,
+            AddTransactionArea(onSubmit: handleAddTransaction),
+            SizedBox(
+              height: 350,
+              child: ListView.builder(
+                itemBuilder: (ctx, index) =>
+                    TransactionItem(transactionModel: transactions[index]),
+                itemCount: transactions.length,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
