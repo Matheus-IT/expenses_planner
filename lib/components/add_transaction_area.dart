@@ -5,7 +5,7 @@ class AddTransactionArea extends StatelessWidget {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
 
-  void Function(String, String) onSubmit;
+  final void Function(String, String) onSubmit;
 
   AddTransactionArea({required this.onSubmit, Key? key}) : super(key: key);
 

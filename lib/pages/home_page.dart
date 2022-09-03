@@ -7,7 +7,7 @@ import '../dummy_data.dart';
 import '../models/transaction_model.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -31,9 +31,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter App'),
-        // actions: [
-        //   IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-        // ],
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
       body: SingleChildScrollView(
         child: Column(
