@@ -26,17 +26,28 @@ class _HomePageState extends State<HomePage> {
     setState(() => transactions.add(newTransaction));
   }
 
+  void showAddNewTransactionArea(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return AddTransactionArea(onSubmit: handleAddTransaction);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter App'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+          IconButton(
+            onPressed: () => showAddNewTransactionArea(context),
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => showAddNewTransactionArea(context),
         child: const Icon(Icons.add),
       ),
       body: SingleChildScrollView(
