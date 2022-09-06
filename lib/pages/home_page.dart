@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
       id: const Uuid().v4(),
     );
     setState(() => transactions.add(newTransaction));
+    Navigator.of(context).pop();
   }
 
   void showAddNewTransactionArea(BuildContext ctx) {

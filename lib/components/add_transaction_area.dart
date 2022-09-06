@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
-class AddTransactionArea extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
+class AddTransactionArea extends StatefulWidget {
   final void Function(String, String) onSubmit;
 
-  AddTransactionArea({required this.onSubmit, Key? key}) : super(key: key);
+  const AddTransactionArea({required this.onSubmit, Key? key})
+      : super(key: key);
+
+  @override
+  State<AddTransactionArea> createState() => _AddTransactionAreaState();
+}
+
+class _AddTransactionAreaState extends State<AddTransactionArea> {
+  final _formKey = GlobalKey<FormState>();
+
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   String? titleValidator(String? inputTitle) {
     if (inputTitle == null || inputTitle.isEmpty) {
@@ -61,7 +69,8 @@ class AddTransactionArea extends StatelessWidget {
                 style: TextButton.styleFrom(surfaceTintColor: Colors.purple),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    onSubmit(titleController.text, amountController.text);
+                    widget.onSubmit(
+                        titleController.text, amountController.text);
                   }
                 },
                 child: const Text('Add transaction'),
