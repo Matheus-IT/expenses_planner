@@ -1,4 +1,5 @@
 import 'package:expenses_planner/components/chart.dart';
+import 'package:expenses_planner/components/no_transactions_notice.dart';
 import 'package:expenses_planner/dummy_data.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
@@ -68,43 +69,22 @@ class _HomePageState extends State<HomePage> {
         onPressed: () => showAddNewTransactionArea(context),
         child: const Icon(Icons.add),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Chart(recentTransactions: transactions),
-            SizedBox(
-              height: 350,
-              child: transactions.isEmpty
-                  ? Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            'No transactions yet...',
-                            style: Theme.of(context).textTheme.headline6,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        SizedBox(
-                          height: 200,
-                          child: Image.asset(
-                            'assets/images/waiting.png',
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                      ],
-                    )
-                  : ListView.builder(
-                      itemBuilder: (ctx, index) => TransactionItem(
-                          transactionModel: transactions[index],
-                          onDeleteTransaction: handleDeleteTransaction),
-                      itemCount: transactions.length,
+      body: Column(
+        children: [
+          Chart(recentTransactions: transactions),
+          transactions.isEmpty
+              ? const NoTransactionsNotice()
+              : Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (ctx, index) => TransactionItem(
+                      transactionModel: transactions[index],
+                      onDeleteTransaction: handleDeleteTransaction,
                     ),
-            ),
-          ],
-        ),
+                    itemCount: transactions.length,
+                  ),
+                ),
+        ],
       ),
     );
   }
