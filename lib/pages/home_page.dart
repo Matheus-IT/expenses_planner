@@ -17,11 +17,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<TransactionModel> transactions = dummyData;
 
-  void handleAddTransaction(String title, String amount) {
+  void handleAddTransaction(
+    String title,
+    String amount,
+    DateTime selectedDate,
+  ) {
     final newTransaction = TransactionModel(
       title: title,
       amount: double.parse(amount),
-      date: DateTime.now(),
+      date: selectedDate,
       id: const Uuid().v4(),
     );
     setState(() => transactions.add(newTransaction));

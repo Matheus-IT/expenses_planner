@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AddTransactionArea extends StatefulWidget {
-  final void Function(String, String) onSubmit;
+  final void Function(String, String, DateTime) onSubmit;
 
   const AddTransactionArea({required this.onSubmit, Key? key})
       : super(key: key);
@@ -12,10 +13,9 @@ class AddTransactionArea extends StatefulWidget {
 
 class _AddTransactionAreaState extends State<AddTransactionArea> {
   final _formKey = GlobalKey<FormState>();
-
   final titleController = TextEditingController();
-
   final amountController = TextEditingController();
+  DateTime? _selectedDate;
 
   String? titleValidator(String? inputTitle) {
     if (inputTitle == null || inputTitle.isEmpty) {
@@ -43,6 +43,20 @@ class _AddTransactionAreaState extends State<AddTransactionArea> {
     return null;
   }
 
+  void presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2022),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() => _selectedDate = pickedDate);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -59,21 +73,43 @@ class _AddTransactionAreaState extends State<AddTransactionArea> {
                 textInputAction: TextInputAction.next,
               ),
               TextFormField(
-                  decoration: const InputDecoration(label: Text('Amount')),
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  controller: amountController,
-                  validator: amountValidator,
-                  textInputAction: TextInputAction.done),
-              TextButton(
-                style: TextButton.styleFrom(surfaceTintColor: Colors.purple),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    widget.onSubmit(
-                        titleController.text, amountController.text);
-                  }
-                },
-                child: const Text('Add transaction'),
+                decoration: const InputDecoration(label: Text('Amount')),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                controller: amountController,
+                validator: amountValidator,
+                textInputAction: TextInputAction.done,
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Text(
+                    _selectedDate == null
+                        ? 'No date chosen'
+                        : 'Date: ${DateFormat.yMd().format(_selectedDate!)}',
+                  ),
+                  TextButton(
+                    onPressed: presentDatePicker,
+                    child: const Text('Choose date'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate() &&
+                        _selectedDate != null) {
+                      widget.onSubmit(
+                        titleController.text,
+                        amountController.text,
+                        _selectedDate!,
+                      );
+                    }
+                  },
+                  child: const Text('Add transaction'),
+                ),
               )
             ],
           ),
