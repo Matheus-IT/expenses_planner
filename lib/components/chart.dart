@@ -25,7 +25,7 @@ class Chart extends StatelessWidget {
       }
 
       return {'day': dayShortVersion, 'amount': totalSum};
-    });
+    }).reversed.toList();
   }
 
   double get totalSpending {
@@ -50,7 +50,6 @@ class Chart extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.end,
           children: groupedTransactionValues
               .map(
                 (transactionData) => Flexible(
