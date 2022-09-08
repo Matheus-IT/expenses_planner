@@ -1,10 +1,9 @@
-import 'package:expenses_planner/components/card.dart';
+import 'package:expenses_planner/components/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 import '../components/add_transaction_area.dart';
 import '../components/transaction_item.dart';
-import '../dummy_data.dart';
 import '../models/transaction_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<TransactionModel> transactions = dummyData;
+  final List<TransactionModel> transactions = [];
 
   void handleAddTransaction(String title, String amount) {
     final newTransaction = TransactionModel(
@@ -34,6 +33,12 @@ class _HomePageState extends State<HomePage> {
         builder: (_) {
           return AddTransactionArea(onSubmit: handleAddTransaction);
         });
+  }
+
+  List<TransactionModel> get recentTransactions {
+    return transactions.where((t) {
+      return t.date.isAfter(DateTime.now().subtract(const Duration(days: 7)));
+    }).toList();
   }
 
   @override
@@ -55,10 +60,10 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CustomCard(recentTransactions: transactions),
+            Chart(recentTransactions: transactions),
             SizedBox(
               height: 350,
-              child: !transactions.isEmpty
+              child: transactions.isEmpty
                   ? Column(
                       children: [
                         Padding(
