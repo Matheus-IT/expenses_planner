@@ -61,14 +61,35 @@ class _HomePageState extends State<HomePage> {
                 child: Text('Card 1'),
               ),
             ),
-            AddTransactionArea(onSubmit: handleAddTransaction),
             SizedBox(
               height: 350,
-              child: ListView.builder(
-                itemBuilder: (ctx, index) =>
-                    TransactionItem(transactionModel: transactions[index]),
-                itemCount: transactions.length,
-              ),
+              child: !transactions.isEmpty
+                  ? Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            'No transactions yet...',
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          height: 200,
+                          child: Image.asset(
+                            'assets/images/waiting.png',
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      ],
+                    )
+                  : ListView.builder(
+                      itemBuilder: (ctx, index) => TransactionItem(
+                          transactionModel: transactions[index]),
+                      itemCount: transactions.length,
+                    ),
             ),
           ],
         ),
