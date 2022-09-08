@@ -1,4 +1,5 @@
 import 'package:expenses_planner/components/chart.dart';
+import 'package:expenses_planner/dummy_data.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<TransactionModel> transactions = [];
+  final List<TransactionModel> transactions = dummyData;
 
   void handleAddTransaction(String title, String amount) {
     final newTransaction = TransactionModel(
