@@ -1,3 +1,4 @@
+import 'package:expenses_planner/components/card.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -54,13 +55,7 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              width: double.infinity,
-              child: Card(
-                elevation: 5,
-                child: Text('Card 1'),
-              ),
-            ),
+            CustomCard(recentTransactions: transactions),
             SizedBox(
               height: 350,
               child: !transactions.isEmpty
