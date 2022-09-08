@@ -32,6 +32,12 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).pop();
   }
 
+  void handleDeleteTransaction(String id) {
+    setState(() {
+      transactions.removeWhere((element) => element.id == id);
+    });
+  }
+
   void showAddNewTransactionArea(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
@@ -92,7 +98,8 @@ class _HomePageState extends State<HomePage> {
                     )
                   : ListView.builder(
                       itemBuilder: (ctx, index) => TransactionItem(
-                          transactionModel: transactions[index]),
+                          transactionModel: transactions[index],
+                          onDeleteTransaction: handleDeleteTransaction),
                       itemCount: transactions.length,
                     ),
             ),

@@ -4,9 +4,11 @@ import 'package:intl/intl.dart';
 
 class TransactionItem extends StatelessWidget {
   final TransactionModel transactionModel;
+  final void Function(String) onDeleteTransaction;
 
   const TransactionItem({
     required this.transactionModel,
+    required this.onDeleteTransaction,
     Key? key,
   }) : super(key: key);
 
@@ -28,6 +30,11 @@ class TransactionItem extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         subtitle: Text(DateFormat.yMMMd().format(transactionModel.date)),
+        trailing: IconButton(
+          icon: const Icon(Icons.delete),
+          color: Theme.of(context).errorColor,
+          onPressed: () => onDeleteTransaction(transactionModel.id),
+        ),
       ),
     );
   }
