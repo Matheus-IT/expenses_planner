@@ -71,16 +71,20 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          Chart(recentTransactions: transactions),
           transactions.isEmpty
               ? const NoTransactionsNotice()
               : Expanded(
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemBuilder: (ctx, index) => TransactionItem(
-                      transactionModel: transactions[index],
-                      onDeleteTransaction: handleDeleteTransaction,
-                    ),
+                    itemBuilder: (ctx, index) {
+                      if (index == 0) {
+                        return Chart(recentTransactions: transactions);
+                      }
+                      return TransactionItem(
+                        transactionModel: transactions[index],
+                        onDeleteTransaction: handleDeleteTransaction,
+                      );
+                    },
                     itemCount: transactions.length,
                   ),
                 ),

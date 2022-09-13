@@ -37,4 +37,22 @@ final dummyData = [
     amount: 16.53,
     date: DateTime.now(),
   ),
+  TransactionModel(
+    id: 't7',
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: 't8',
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: 't9',
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
 ];
