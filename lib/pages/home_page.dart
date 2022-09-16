@@ -56,10 +56,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('build() _HomePageState');
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter App'),
+        title: const Text('Expanses Planner'),
         actions: [
           IconButton(
             onPressed: () => showAddNewTransactionArea(context),
