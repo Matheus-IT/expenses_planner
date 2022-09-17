@@ -56,16 +56,29 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // AppBar(
+    //     title: const Text('Expanses Planner'),
+    //     actions: [
+    //       IconButton(
+    //         onPressed: () => showAddNewTransactionArea(context),
+    //         icon: const Icon(Icons.add),
+    //       ),
+    //     ],
+    //   )
+    //   SliverAppBar(
+    //   expandedHeight: 150.0,
+    //   flexibleSpace: const FlexibleSpaceBar(
+    //     title: Text('Available seats'),
+    //   ),
+    //   actions: <Widget>[
+    //     IconButton(
+    //       icon: const Icon(Icons.add_circle),
+    //       tooltip: 'Add new entry',
+    //       onPressed: () { /* ... */ },
+    //     ),
+    //   ]
+    // )
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expanses Planner'),
-        actions: [
-          IconButton(
-            onPressed: () => showAddNewTransactionArea(context),
-            icon: const Icon(Icons.add),
-          ),
-        ],
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showAddNewTransactionArea(context),
         child: const Icon(Icons.add),
