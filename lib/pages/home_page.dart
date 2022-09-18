@@ -2,6 +2,7 @@ import 'package:expenses_planner/components/chart.dart';
 import 'package:expenses_planner/components/no_transactions_notice.dart';
 import 'package:expenses_planner/providers/transaction_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:uuid/uuid.dart';
 
 import '../components/add_transaction_area.dart';
@@ -56,53 +57,63 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // AppBar(
-    //     title: const Text('Expanses Planner'),
-    //     actions: [
-    //       IconButton(
-    //         onPressed: () => showAddNewTransactionArea(context),
-    //         icon: const Icon(Icons.add),
-    //       ),
-    //     ],
-    //   )
-    //   SliverAppBar(
-    //   expandedHeight: 150.0,
-    //   flexibleSpace: const FlexibleSpaceBar(
-    //     title: Text('Available seats'),
-    //   ),
-    //   actions: <Widget>[
-    //     IconButton(
-    //       icon: const Icon(Icons.add_circle),
-    //       tooltip: 'Add new entry',
-    //       onPressed: () { /* ... */ },
-    //     ),
-    //   ]
-    // )
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => showAddNewTransactionArea(context),
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            transactions.isEmpty
-                ? const NoTransactionsNotice()
-                : Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemBuilder: (ctx, index) {
-                        if (index == 0) {
-                          return Chart(recentTransactions: transactions);
-                        }
-                        return TransactionItem(
-                          transactionModel: transactions[index],
-                          onDeleteTransaction: handleDeleteTransaction,
-                        );
-                      },
-                      itemCount: transactions.length,
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              expandedHeight: 150.0,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Row(
+                  children: const [
+                    Text('Expenses Planner'),
+                    SizedBox(width: 4),
+                    Icon(
+                      Icons.account_balance_wallet_outlined,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+                background: Container(
+                  width: double.infinity,
+                  child: Transform.scale(
+                    scaleY: -1,
+                    child: SvgPicture.asset(
+                      'assets/images/appbar-background.svg',
+                      semanticsLabel: 'Acme Logo',
+                      color: Colors.lightGreen,
+                      fit: BoxFit.fill,
                     ),
                   ),
+                ),
+              ),
+              actions: <Widget>[
+                IconButton(
+                  onPressed: () => showAddNewTransactionArea(context),
+                  icon: const Icon(Icons.add_circle),
+                ),
+              ],
+            ),
+            SliverPrototypeExtentList(
+              prototypeItem: TransactionItem(
+                transactionModel: transactions[0],
+                onDeleteTransaction: handleDeleteTransaction,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                (ctx, i) => transactions.isEmpty
+                    ? const NoTransactionsNotice()
+                    : TransactionItem(
+                        transactionModel: transactions[i],
+                        onDeleteTransaction: handleDeleteTransaction,
+                      ),
+                childCount: transactions.length,
+              ),
+            ),
           ],
         ),
       ),

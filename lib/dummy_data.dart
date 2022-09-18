@@ -1,56 +1,100 @@
+import 'package:uuid/uuid.dart';
+
 import 'models/transaction_model.dart';
 
 final dummyData = [
   TransactionModel(
-    id: 't1',
-    title: 'New Shoes',
-    amount: 69.99,
-    date: DateTime.now(),
-  ),
-  TransactionModel(
-    id: 't2',
+    id: const Uuid().v4(),
     title: 'Weekly Groceries',
     amount: 16.53,
     date: DateTime.now(),
   ),
   TransactionModel(
-    id: 't3',
+    id: const Uuid().v4(),
     title: 'Weekly Groceries',
     amount: 16.53,
     date: DateTime.now(),
   ),
   TransactionModel(
-    id: 't4',
+    id: const Uuid().v4(),
     title: 'Weekly Groceries',
     amount: 16.53,
     date: DateTime.now(),
   ),
   TransactionModel(
-    id: 't5',
+    id: const Uuid().v4(),
     title: 'Weekly Groceries',
     amount: 16.53,
     date: DateTime.now(),
   ),
   TransactionModel(
-    id: 't6',
+    id: const Uuid().v4(),
     title: 'Weekly Groceries',
     amount: 16.53,
     date: DateTime.now(),
   ),
   TransactionModel(
-    id: 't7',
+    id: const Uuid().v4(),
     title: 'Weekly Groceries',
     amount: 16.53,
     date: DateTime.now(),
   ),
   TransactionModel(
-    id: 't8',
+    id: const Uuid().v4(),
     title: 'Weekly Groceries',
     amount: 16.53,
     date: DateTime.now(),
   ),
   TransactionModel(
-    id: 't9',
+    id: const Uuid().v4(),
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: const Uuid().v4(),
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: const Uuid().v4(),
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: const Uuid().v4(),
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: const Uuid().v4(),
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: const Uuid().v4(),
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: const Uuid().v4(),
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: const Uuid().v4(),
+    title: 'Weekly Groceries',
+    amount: 16.53,
+    date: DateTime.now(),
+  ),
+  TransactionModel(
+    id: const Uuid().v4(),
     title: 'Weekly Groceries',
     amount: 16.53,
     date: DateTime.now(),
