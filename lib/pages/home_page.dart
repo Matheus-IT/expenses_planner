@@ -79,18 +79,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                background: Container(
-                  width: double.infinity,
-                  child: Transform.scale(
-                    scaleY: -1,
-                    child: SvgPicture.asset(
-                      'assets/images/appbar-background.svg',
-                      semanticsLabel: 'Acme Logo',
-                      color: Colors.lightGreen,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
               ),
               actions: <Widget>[
                 IconButton(
@@ -98,6 +86,11 @@ class _HomePageState extends State<HomePage> {
                   icon: const Icon(Icons.add_circle),
                 ),
               ],
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                Chart(recentTransactions: recentTransactions),
+              ]),
             ),
             SliverPrototypeExtentList(
               prototypeItem: TransactionItem(
